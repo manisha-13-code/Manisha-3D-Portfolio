@@ -5,7 +5,7 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("/desktop_pc/scene.gltf");
 
   return (
     <mesh>
@@ -24,10 +24,13 @@ const Computers = ({ isMobile }) => {
         scale={isMobile ? 0.7 : 0.75}
         position={isMobile ? [0, -3.8, -3] : [0, -3.8, -1.8]}
         rotation={[-0.01, -0.2, -0.1]}
+        dispose={null}
       />
     </mesh>
   );
 };
+
+useGLTF.preload("./desktop_pc/scene.gltf");
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -70,7 +73,6 @@ const ComputersCanvas = () => {
         <Computers isMobile={isMobile} />
       </Suspense>
 
-      <Preload all />
     </Canvas>
   );
 };
